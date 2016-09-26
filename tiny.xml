@@ -1,0 +1,22 @@
+<domain type='kvm'>
+  <name>{{ VMNAME }}</name>
+  <memory unit='KiB'>262144</memory>
+  <vcpu placement='static'>1</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc-1.3'>hvm</type>
+    <boot dev='cdrom'/>
+  </os>
+  <devices>
+    <emulator>{{ QEMU }}</emulator>
+    <disk type='file' device='cdrom'>
+      <driver name='qemu' type='raw'/>
+      <source file='{{ TESTISO }}'/>
+      <target dev='hdc' bus='ide'/>
+      <readonly/>
+    </disk>
+    <controller type='ide' index='0'/>
+    <graphics type='vnc' port='5900' autoport='no' listen='0.0.0.0'>
+      <listen type='address' address='0.0.0.0'/>
+    </graphics>
+  </devices>
+</domain>
